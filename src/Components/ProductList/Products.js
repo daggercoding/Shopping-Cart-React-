@@ -19,8 +19,8 @@ function Products(props)
         <div className="media-body order-2 order-lg-1">
           <h5 className="mt-0 font-weight-bold mb-2">{props.name}</h5>
           <div style={{display:"flex",justifyContent:"space-evenly",margin:15}}>
-          <h6 style={{color:"green"}}>TOTAL STOCK :{props.stock}</h6>
-          <h6 style={{color:"red"}}>REMAINING STOCK :{stock}</h6>
+          <h6 style={{color:"green"}}>TOTAL STOCK  :{props.stock}</h6>
+          <h6 style={{color:"red"}}>REMAINING STOCK  :{stock}</h6>
           </div>
           <p className="font-italic text-muted mb-0 small">{props.description}</p>
           <Productdetails price={props.price}  avialable={props.avialable} stock={props.stock} getStock={getStock} />
