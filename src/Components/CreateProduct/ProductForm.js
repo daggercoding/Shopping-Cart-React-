@@ -15,7 +15,7 @@ function CreateForm(props)
     let [pDescription,updateDescription]=useState(false)
     let [pSwitch,updateSwitch]=useState("")
     let [pImage,updateImage]=useState("")
-    
+    let [pStock,updateStock]=useState("")
 function nameEventHandler(event)
 {   // and by this way we can mange the state
     // setUserInput({...userInput,pName:event.target.value})
@@ -45,30 +45,39 @@ function imageEventHandler(event)
     
 }
 
+function stockEventHandler(event)
+{
+    updateStock(event.target.value)
+}
+
 function collectData(event)
 {
     event.preventDefault();
     let userData={
-        pID: 1, 
+        pID:"", 
         pName: pName, 
         desc: pDescription,
         isAvailable: Boolean(pSwitch),
         image: pImage,
-        price: Number(pPrice)     
+        price: Number(pPrice) ,
+        availableStock: pStock   
     }
     updateDescription("")
     updateImage("")
     updateName("")
     updateSwitch(false)
     updatePrice("")
+    updateStock("")
 
    props.getProduct(userData)
+   props.hideForm()
     
 }
 
    return( <>
    <form className="row g-3" onSubmit={collectData}>
         <div className="col-md-6">
+
             <label forhtml="name">Product Name</label>
             <input type="text" 
                     className="form-control" 
@@ -111,9 +120,16 @@ function collectData(event)
             value={pImage}
             onChange={imageEventHandler}/>
         </div>
-        
+
+        <input type="number" 
+                    className="form-control" 
+                    id="stock" 
+                    placeholder="Product stock" 
+                    value={pStock}
+                    onChange={stockEventHandler}/>
 
         <button type="submit" className="btn btn-primary">Add Product</button>
+        <button type="button" onClick={props.hideForm}>Cancel</button>
     </form>
     
     </>)

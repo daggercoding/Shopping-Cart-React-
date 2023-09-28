@@ -4,45 +4,39 @@ import { useState } from "react";
 
 
 
+
 function ProductDetails(props)
 {
 let [productCount,setProductCount]=useState(0)
+let [stock,setStock]=useState(props.stock)
 
 
-let isAvilable;
-if(productCount>0)
-{
-isAvilable="Available"
-}
-else{
-isAvilable="unAvailable"
-}
+let badgeColor="badge"
+badgeColor+= props.avialable?" bg-primary":" bg-danger"
 
-let badgeColor="badge ml250px "
-badgeColor+= isAvilable==="Available"?"bg-primary":"bg-danger"
-
-function noOfproduct()
-{
-    return productCount>0?productCount:"zero"
-}
 
 function increment()
 {
     setProductCount(++productCount)
+    setStock(--stock)
+    props.getStock(stock)
 }
+
 function decrement()
 {
 setProductCount(--productCount)
+setStock(++stock)
+props.getStock(stock)
 }
   
     return(
         <>
         <div className="d-flex align-items-center justify-content-start mt-1" >
             <h6 className="font-weight-bold my-2">${props.price}</h6>
-            <Button clickHandler={decrement} color={"bg-danger"}>-</Button>
-            <span style={{width:30,textAlign:"center"}}>{noOfproduct()}</span>
-            <Button clickHandler={increment} color={"bg-primary"}>+</Button>
-            <span className={badgeColor}>{isAvilable}</span>
+            <Button clickHandler={decrement} disabled={productCount===0}color={"bg-danger"}>-</Button>
+            <span style={{width:30,textAlign:"center"}}>{productCount}</span>
+            <Button clickHandler={increment} disabled={productCount==props.stock} color={"bg-primary"}>+</Button>
+            <span className={badgeColor}>{props.avialable?"Available":"unAvailable"}</span>
           </div></>
     )
 }

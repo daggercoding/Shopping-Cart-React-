@@ -9,9 +9,10 @@ body {
 .text-gray {
   color: #aaa;
 }
-.ml250px
+
+.badge
 {
-  
-  position: static;
+  background-color: black;
   margin-left: 250px;
+
 }
